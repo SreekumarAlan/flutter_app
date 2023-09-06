@@ -1,29 +1,44 @@
 import 'package:flutter/material.dart';
 
-void main(){
+void main() {
   runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("Header app bar"),
-      ),
-      body: Center(child: Text(
-          "Welcom to flutter app",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 25.0,
-          color: Colors.orange
-        ),
-      )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: increment(),
-        child: Text("click"),
-      ),
-    ),
+    home: MyText(),
     debugShowCheckedModeBanner: false,
   ));
 }
 
-increment(){
+class MyText extends StatefulWidget {
+  const MyText({super.key});
 
+  @override
+  State<MyText> createState() => _MyTextState();
+}
+
+class _MyTextState extends State<MyText> {
+  int count = 0;
+
+  void _increment() {
+    setState(() {
+      count++;
+    });
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Welcome to Flutter"),
+      ),
+      body: Center(
+          child: Text(
+        "You clicked $count times",
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _increment,
+        child: Icon(Icons.add),
+      ),
+    );
+  }
 }
