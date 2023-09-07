@@ -27,10 +27,18 @@ class MyCustomForm extends StatefulWidget {
 class _MyCustomFormState extends State<MyCustomForm> {
   final myController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    myFocusNode = FocusNode();
+  }
 
   @override
   void dispose() {
     myController.dispose();
+    myFocusNode.dispose();
     super.dispose();
   }
 
@@ -41,11 +49,13 @@ class _MyCustomFormState extends State<MyCustomForm> {
       child: Column(
         children: [
           TextField(
+            focusNode: myFocusNode,
             decoration: InputDecoration(
                 border: OutlineInputBorder(), hintText: 'enter search term'),
             controller: myController,
           ),
           TextFormField(
+            autofocus: true,
             validator: (text){
 
               if (text == null || text.isEmpty) {
@@ -63,6 +73,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
           ),
           ElevatedButton(
               onPressed: (){
+                myFocusNode.requestFocus();
                 validateMyFields(context,_formKey);
                 showDialog(context: context,
                     builder: (context){
