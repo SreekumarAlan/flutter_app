@@ -42,7 +42,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
               border: OutlineInputBorder(), hintText: 'Enter search term'),
           controller: myController,
         ),
-        TextField(
+        TextFormField(
+          onChanged: (text){
+            print('First text field: $text (${text.characters.length})');
+          },
           decoration: InputDecoration(
               border: UnderlineInputBorder(), labelText: 'Enter user name'),
         ),
