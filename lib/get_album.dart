@@ -23,11 +23,12 @@ class _AlbumAppState extends State<AlbumApp> {
   }
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
     return Center(
       child: FutureBuilder<Album>(
         future: futureAlbum,
-        builder: (context,snapshot){},
+        builder: (context,snapshot){
+          return Text(snapshot.data!.title);
+        },
       ),
     );
   }
